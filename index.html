@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Didactics Practice Exam: 20 MCQs</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1d2433;--mute:#5d6577;--line:#d9d6cc;--acc:#1f4e79;--accbg:#e4edf6;--ok:#17703a;--okbg:#e2f3e8;--bad:#a82424;--badbg:#fbe6e6;--warn:#8a5a00;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181f;--card:#1c222c;--ink:#e8ebf1;--mute:#9aa3b5;--line:#2f3744;--acc:#7fb2e5;--accbg:#22334a;--ok:#5fd18a;--okbg:#17321f;--bad:#ff8a8a;--badbg:#3a1c1c;--warn:#e3b04b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14181f;--card:#1c222c;--ink:#e8ebf1;--mute:#9aa3b5;--line:#2f3744;--acc:#7fb2e5;--accbg:#22334a;--ok:#5fd18a;--okbg:#17321f;--bad:#ff8a8a;--badbg:#3a1c1c;--warn:#e3b04b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,"Times New Roman",serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+header{padding:28px 0 12px}
+h1{font-size:1.6rem;line-height:1.2;margin:0 0 6px}
+.sub{color:var(--mute);margin:0 0 14px;font-family:system-ui,sans-serif;font-size:.92rem}
+.rules{background:var(--accbg);border-left:4px solid var(--acc);padding:10px 14px;border-radius:4px;font-family:system-ui,sans-serif;font-size:.9rem}
+.rules select{font:inherit;padding:2px 4px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:4px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);font-family:system-ui,sans-serif;font-size:.88rem;display:flex;gap:12px;align-items:center}
+.track{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--acc);transition:width .2s}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:16px 0;padding:16px}
+.q h2{font-size:1rem;margin:0 0 10px;font-weight:600}
+.n{font-family:system-ui,sans-serif;color:var(--acc);font-weight:700;margin-right:6px}
+.ctx{font-size:.9rem;background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:6px;margin:0 0 10px}
+.ctx ol{margin:4px 0 0;padding-left:20px}
+.opt{display:flex;gap:10px;width:100%;text-align:left;font:inherit;color:inherit;background:transparent;border:1px solid var(--line);border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt:focus-visible,button.main:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.opt b{font-family:system-ui,sans-serif;min-width:1.2em}
+.opt.sel{background:var(--accbg);border-color:var(--acc)}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.bad{background:var(--badbg);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.exp{display:none;margin-top:10px;font-size:.9rem;font-family:system-ui,sans-serif;padding:8px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.review .exp{display:block}
+.tag{font-weight:700}
+.tag.ok{color:var(--ok)}.tag.bad{color:var(--bad)}.tag.blank{color:var(--warn)}
+button.main{font:600 1rem system-ui,sans-serif;background:var(--acc);color:var(--bg);border:0;border-radius:6px;padding:12px 22px;cursor:pointer;margin:6px 8px 0 0}
+button.alt{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+#res{display:none;background:var(--card);border:2px solid var(--acc);border-radius:8px;padding:20px;margin:18px 0;font-family:system-ui,sans-serif}
+#res .big{font-size:2.6rem;font-weight:700;line-height:1.1;font-family:Georgia,serif}
+#res table{border-collapse:collapse;margin:10px 0;font-size:.92rem}
+#res td{padding:3px 14px 3px 0}
+.note{color:var(--mute);font-size:.82rem;font-family:system-ui,sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Didactics practice exam</h1>
+<p class="sub">20 multiple-choice questions, one answer each. Score out of 20.</p>
+<div class="rules"><b>Marking (Canadian system):</b> correct answer +1 · blank 0 · wrong answer −<select id="pen"><option value="0.25" selected>0.25</option><option value="0.33">0.33</option><option value="0.5">0.5</option><option value="1">1</option></select> point. Click a chosen answer again to clear it and leave the question blank. The final grade cannot go below 0.</div>
+</header>
+<div class="bar"><span id="cnt">0 / 20 answered</span><div class="track"><div class="fill" id="fill"></div></div></div>
+<div id="qs"></div>
+<div id="res"></div>
+<div id="act"><button class="main" id="sub">Submit exam</button></div>
+<p class="note">The answer key was built from the course material and standard didactics sources, not from an official correction, so check any answer that surprises you against your course notes.</p>
+</div>
+<script>
+const Q=[
+["______ is generally considered an implementation of the principles underpinning the adopted language instruction model.",["A syllabus","A curriculum","A method","An approach","None of the above"],2,"A method puts the principles of an approach into practice. The approach is the theory itself."],
+["Within the ALM, learners' errors are viewed as ______.",["intolerable","tolerable","learning opportunities","part of learning","None of the above"],0,"Behaviourism treats errors as bad habits to avoid, so the ALM corrects them immediately."],
+["Task-Based Instruction (TBI) focuses primarily on ______.",["teaching English through real-world-like activities.","teaching English through unrelated content.","teaching English through grammar and vocabulary.","teaching English through translation tasks.","None of the above"],0,"Learners complete meaningful, real-life-like tasks, and language is learned while doing them."],
+["Which method is characterized by its emphasis on what is formally referred to as 'desuggestive barriers'?",["Suggestopedia","The Natural Approach","The Silent Way","The Audio-Lingual Method","None of the above"],0,"Lozanov's Suggestopedia aims to remove psychological barriers (relaxation, positive atmosphere) to speed up learning."],
+["Which of the following is a component of the syllabus?",["Goals and objectives","Educational philosophy","Explicit learning outcomes","Detailed course content","None of the above"],3,"A syllabus details the content of a course. Philosophy, goals and outcomes belong to the broader curriculum."],
+["Which among the approaches and methods below grants substantial emphasis to teacher-student interaction?",["The Direct Method","Task-based Language Teaching","The Audiolingual Method","The Silent Way","None of the above"],0,"In the Direct Method the teacher questions constantly and learners respond. TBLT stresses learner-learner interaction, and the Silent Way keeps the teacher mostly silent."],
+["______ refers to the practical and detailed application of principles and strategies designed to facilitate the teaching or learning process.",["A method","A technique","A curriculum","An approach","None of the above"],0,"A method is a set of procedures applying an approach. A technique is one single activity."],
+["What is the approach that is based on the theory that language learning is most effective when learners are surrounded by the target language in meaningful and authentic contexts?",["The Immersion Approach","Content-based Instruction","The Natural Approach","The Eclectic Approach","None of the above"],0,"Immersion surrounds learners with the target language in authentic, meaningful contexts."],
+["A Teacher-Centered Approach ______.",["is characterized by prioritizing students' interests","is characterized by adopting implicit skill teaching","is characterized by promoting students' collaboration","is characterized by fostering students' critical thinking","None of the above"],4,"Teacher-centred teaching is built on explicit teaching and teacher control. All four statements describe learner-centred features."],
+["What does the term \"recast\" refer to in EFL teaching?",["A technique that involves having students imitate various accents","A corrective technique used in response to a learner's error","A technique used for memorizing vocabulary and idioms","A technique that involves memorizing and repeating lengthy passages","None of the above"],1,"In a recast the teacher rephrases the learner's incorrect utterance correctly without pointing out the error."],
+["______ focuses on aligning educational practices with predetermined criteria and benchmarks, ensuring that students meet the established expectations.",["Task-based Language Teaching","Standards-based Instruction","Community Language Learning","Communicative Language Teaching","None of the above"],1,"Standards-based instruction is built on what learners should know and be able to do (content, performance and proficiency standards)."],
+["Which among the learning theories below views learning as an active mental process that involves the acquisition, organization, and retrieval of information?",["Humanism","Behaviorism","Social Constructivism","Connectivism","None of the above"],4,"This describes Cognitivism, which is not listed."],
+["Go through the following activity employed at the end of a unit. This activity is an illustration of which approach to foreign language teaching?",["Problem-based Learning","Project-based Learning","Content-based Instruction","Discovery Learning","None of the above"],1,"Planning, researching, executing a collaboration and reflecting on a final outcome are the stages of project-based learning.",
+"<b>Situation:</b> Your class is collaborating with a partner school from a different country. The goal is to create a cultural exchange initiative that involves sharing traditions, customs, and language-related activities.<ol><li>Identify common cultural elements;</li><li>Brainstorm ideas for interactive language-based activities;</li><li>Conduct research on each other's traditions and customs;</li><li>Develop a detailed plan;</li><li>Execute the collaboration with the partner school;</li><li>Reflect on the outcomes and discuss the experience with the partner school.</li></ol>"],
+["Which of the following does NOT describe Learner-Centered Instruction?",["An approach addressing learners' needs and preferences","An instructional model whereby teachers' decisions are aimed at learning","An approach prioritizing students' active engagement in learning activities","An approach prioritizing learners' successful absorption of content","None of the above"],3,"Prioritizing the absorption of content treats learners as passive receivers, which is a teacher-centred view."],
+["The concept of 'Intake' in language learning refers to the ______.",["memorization of vocabulary","explicit language instruction","internalized language input","analysis of language patterns","None of the above"],2,"Input is the language learners are exposed to. Intake is the part they internalize."],
+["In language education, statements such as the ones above are examples of ______.",["competencies","outcomes","standards","descriptors","None of the above"],2,"Statements of what learners should know and be able to do, such as reading and interpreting high-frequency words or citing evidence from a text, are standards.",
+"<b>Read the following statements:</b><ol><li>Read and interpret high-frequency words, phrases, and abbreviations in everyday contexts;</li><li>Identify the key details and cite evidence from a text.</li></ol>"],
+["Heavy reliance on some of the approaches/methods below results in learners encountering challenges with writing in the target language. Which of the following does NOT incur such challenges?",["The Audiolingual Method","The Direct Method","Task-Based Language Teaching","The Silent Way","None of the above"],2,"The ALM, Direct Method and Silent Way prioritize listening and speaking, so writing is delayed or neglected. TBLT can integrate all four skills."],
+["Which among the following is NOT a learning style?",["Linguistic","Tactile","Auditory","Visual","None of the above"],0,"Visual, auditory and tactile/kinaesthetic are learning styles. Linguistic is one of Gardner's intelligences."],
+["Which of the following multiple intelligences intersects with the learning style known as \"Solitary\"?",["Interpersonal","Bodily-Kinesthetic","Intrapersonal","Linguistic","None of the above"],2,"Solitary (intrapersonal) learners prefer to learn alone and understand themselves well."],
+["Ms. Benalim, an EFL teacher, provides differentiated instruction to her learners to accommodate their diverse needs. What is NOT a key aspect of this instructional approach?",["Adapting content, process, and product","Offering various learning experiences","Providing varied learning resources","Maintaining a uniform learning environment","None of the above"],3,"Differentiation adapts content, process, product and the environment to learners. A uniform environment contradicts it."]
+];
+const L="ABCDE",ans=Array(Q.length).fill(-1);let done=false;
+const $=id=>document.getElementById(id);
+$("qs").innerHTML=Q.map((q,i)=>`<section class="q" id="q${i}"><h2><span class="n">Q${i+1}</span>${q[0]}</h2>${q[4]?`<div class="ctx">${q[4]}</div>`:""}${q[1].map((o,j)=>`<button class="opt" data-i="${i}" data-j="${j}"><b>${L[j]}</b><span>${o}</span></button>`).join("")}<div class="exp" id="e${i}"></div></section>`).join("");
+function prog(){const n=ans.filter(a=>a>=0).length;$("cnt").textContent=n+" / "+Q.length+" answered";$("fill").style.width=(n/Q.length*100)+"%"}
+$("qs").onclick=e=>{const b=e.target.closest(".opt");if(!b||done)return;const i=+b.dataset.i,j=+b.dataset.j;ans[i]=ans[i]===j?-1:j;document.querySelectorAll("#q"+i+" .opt").forEach((o,k)=>o.classList.toggle("sel",ans[i]===k));prog()};
+function finish(){
+const pen=+$("pen").value;let c=0,w=0,b=0;
+Q.forEach((q,i)=>{const a=ans[i];if(a<0)b++;else if(a===q[2])c++;else w++;
+const sec=$("q"+i);sec.classList.add("review");
+sec.querySelectorAll(".opt").forEach((o,k)=>{o.disabled=true;o.classList.remove("sel");if(k===q[2])o.classList.add("ok");else if(k===a)o.classList.add("bad")});
+const t=a<0?'<span class="tag blank">Not answered (0)</span>':a===q[2]?'<span class="tag ok">Correct (+1)</span>':'<span class="tag bad">Wrong (−'+pen+')</span>';
+$("e"+i).innerHTML=t+" · Correct answer: <b>"+L[q[2]]+"</b>. "+q[3]});
+$("pen").disabled=true;done=true;
+const raw=c-w*pen,fin=Math.max(0,raw),f=x=>(Math.round(x*100)/100).toString();
+$("res").style.display="block";
+$("res").innerHTML=`<div class="big">${f(fin)} / 20</div><table><tr><td>Correct answers</td><td>${c} × +1 = +${c}</td></tr><tr><td>Wrong answers</td><td>${w} × −${pen} = −${f(w*pen)}</td></tr><tr><td>Not answered</td><td>${b} × 0 = 0</td></tr><tr><td>Raw total</td><td>${f(raw)}${raw<0?" (set to 0)":""}</td></tr></table><p class="note">Scroll down to review every question with its correct answer and explanation.</p>`;
+$("act").innerHTML='<button class="main" id="again">Retake exam</button><button class="main alt" id="top">Back to score</button>';
+$("again").onclick=()=>location.reload();$("top").onclick=()=>$("res").scrollIntoView({behavior:"smooth"});
+$("res").scrollIntoView({behavior:"smooth"})}
+$("sub").onclick=finish;
+prog();
+</script>
+</body>
+</html>
